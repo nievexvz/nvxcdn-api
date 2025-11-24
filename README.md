@@ -18,8 +18,9 @@ Upload file dan dapatkan permanent live URL serta pendekkan link yang sangat pan
 - `https://nievexsviz.my.id/api/v1/cdn`
 - `https://nievexsviz.my.id/api/v1/short`
 
-Contoh upload menggunakan cURL:
-```bash
+<details>
+<summary>Contoh upload menggunakan cURL:</summary>
+ ```bash
 # Upload file image
 curl -X POST  https://nievexsviz.my.id/api/v1/cdn \
   -H "x-api-key: nvxc" \
@@ -35,7 +36,14 @@ curl -X POST https://nievexsviz.my.id/api/v1/cdn \
   -H "x-api-key: nvxc" \
   -F "file=@./notes.txt"
 ```
+</details>
+
+---
+
 Contoh shorten menggunakan cURL:
+
+<details>
+<summary>Contoh upload menggunakan cURL:</summary>
 ```bash
 # Short URL dengan auto-generated ID
 curl -X POST https://nievexsviz.my.id/api/v1/short \
@@ -54,8 +62,14 @@ curl -X POST https://nievexsviz.my.id/api/v1/short \
     "customId": "my-page"
   }'
 ```
+</details>
+
+---
 
 Contoh upload menggunakan Node.js (min v18+)
+
+<details>
+<summary>Contoh upload menggunakan cURL:</summary>
 ```js
 const axios = require('axios');
 const fs = require('fs');
@@ -98,8 +112,13 @@ if (process.argv[2]) {
     console.log('Example: node simple-upload.js image.jpg');
 }
 ```
+</details>
+
+---
 
 Contoh shorten dengan Node.js (min v18+)
+<details>
+<summary>Contoh upload menggunakan cURL:</summary>
 ```js
 const axios = require('axios');
 
@@ -142,5 +161,7 @@ if (process.argv[2]) {
     console.log('Example: node simple-shorten.js https://github.com mygit');
 }
 ```
+</details>
 
 ## — 2025 NineTwelve.
+
