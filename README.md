@@ -10,33 +10,35 @@ Upload file dan dapatkan permanent live URL serta pendekkan link yang sangat pan
 
 ---
 
+**Demo available on [nievexsviz.my.id](https://nievexsviz.my.id)**
+
 ## API
 
 **Endpoint: **
-- `/api/v1/cdn`
-- `/api/v1/short`
+- `https://nievexsviz.my.id/api/v1/cdn`
+- `https://nievexsviz.my.id/api/v1/short`
 
 Contoh upload menggunakan cURL:
 ```bash
 # Upload file image
-curl -X POST /api/v1/cdn \
+curl -X POST  https://nievexsviz.my.id/api/v1/cdn \
   -H "x-api-key: nvxc" \
   -F "file=@./test-image.jpg"
 
 # Upload file PDF
-curl -X POST /api/v1/cdn \
+curl -X POST https://nievexsviz.my.id/api/v1/cdn \
   -H "x-api-key: nvxc" \
   -F "file=@./document.pdf"
 
 # Upload file text
-curl -X POST /api/v1/cdn \
+curl -X POST https://nievexsviz.my.id/api/v1/cdn \
   -H "x-api-key: nvxc" \
   -F "file=@./notes.txt"
 ```
 Contoh shorten menggunakan cURL:
 ```bash
 # Short URL dengan auto-generated ID
-curl -X POST http://localhost:6767/api/v1/short \
+curl -X POST https://nievexsviz.my.id/api/v1/short \
   -H "x-api-key: nvxc" \
   -H "Content-Type: application/json" \
   -d '{
@@ -44,7 +46,7 @@ curl -X POST http://localhost:6767/api/v1/short \
   }'
 
 # Short URL dengan custom ID
-curl -X POST http://localhost:6767/api/v1/short \
+curl -X POST https://nievexsviz.my.id/api/v1/short \
   -H "x-api-key: nvxc" \
   -H "Content-Type: application/json" \
   -d '{
@@ -66,7 +68,7 @@ async function uploadFile(filePath) {
         const formData = new FormData();
         formData.append('file', fs.createReadStream(filePath));
 
-        const response = await axios.post('http://localhost:6767/api/v1/cdn', formData, {
+        const response = await axios.post('https://nievexsviz.my.id/api/v1/cdn', formData, {
             headers: {
                 'x-api-key': 'nvxc',
                 ...formData.getHeaders()
@@ -108,7 +110,7 @@ async function createShortUrl(longUrl, customId = null) {
         const data = { url: longUrl };
         if (customId) data.customId = customId;
 
-        const response = await axios.post('http://localhost:6767/api/v1/short', data, {
+        const response = await axios.post('https://nievexsviz.my.id/api/v1/short', data, {
             headers: {
                 'x-api-key': 'nvxc',
                 'Content-Type': 'application/json'
