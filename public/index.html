@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A Open-Source CDN Uploader and Link Shortener by NineTwelve" />
+  <meta name="author" content="NineTwelve" />
+  <title>GitHub CDN & URL Shortener</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://kit.fontawesome.com/676ca851f3.js" crossorigin="anonymous"></script>
+  <script src="/js/app.js" defer crossorigin="anonymous"></script>
+  <script src="/js/short.js" defer crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+  <div class="container mx-auto px-4 py-8">
+    <div class="text-center mb-12 fade-in">
+      <div class="flex justify-center items-center mb-4">
+        <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mr-4">
+          <i class="fas fa-cloud text-white text-2xl"></i>
+        </div>
+        <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center">
+          <i class="fas fa-link text-white text-2xl"></i>
+        </div>
+      </div>
+      <h1 class="text-4xl font-bold text-gray-800 mb-4">
+        CDN & URL Shortener
+      </h1>
+      <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+        Upload file hingga 25MB dan buat short URL
+      </p>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+      <div class="bg-white rounded-2xl shadow-xl p-6 fade-in" style="animation-delay: 0.1s">
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="text-2xl font-bold text-gray-800 flex items-center">
+            <i class="fas fa-cloud-upload-alt text-blue-500 mr-3"></i>
+            CDN File Upload
+          </h2>
+          <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">Max 25MB</span>
+        </div>
+        <div class="mb-6">
+          <label class="block text-gray-700 text-sm font-bold mb-3" for="fileInput">
+            <i class="fas fa-file mr-2"></i>Pilih File
+          </label>
+          <div class="border-2 border-dashed border-gray-300 rounded-2xl p-6 text-center transition-all duration-300 hover:border-blue-400 hover:bg-blue-50" id="dropZone">
+            <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-3"></i>
+            <p class="text-gray-600 mb-2">Drag & drop file di sini atau klik untuk memilih</p>
+            <p class="text-sm text-gray-500">Support semua jenis file</p>
+            <input type="file" id="fileInput" class="hidden" accept="*/*">
+            <button onclick="document.getElementById('fileInput').click()" class="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-lg transition duration-200">
+              <i class="fas fa-folder-open mr-2"></i>Pilih File
+            </button>
+          </div>
+          <div id="fileInfo" class="mt-3 hidden">
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-3">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                  <i class="fas fa-file text-blue-500 mr-2"></i>
+                  <span id="selectedFileName" class="font-medium text-gray-700"></span>
+                </div>
+                <span id="selectedFileSize" class="text-sm text-gray-600"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button onclick="uploadFile()" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 px-4 rounded-lg transition duration-200 flex items-center justify-center transform hover:scale-105" id="uploadBtn">
+          <i class="fas fa-upload mr-2"></i>
+          Upload
+        </button>
+        <div id="uploadProgress" class="mt-6 hidden">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-sm font-medium text-gray-700">Progress Upload</span>
+            <span id="progressPercent" class="text-sm font-bold text-blue-600">0%</span>
+          </div>
+          <div class="w-full bg-gray-200 rounded-full h-3">
+            <div id="progressBar" class="bg-blue-500 h-3 rounded-full progress-bar" style="width: 0%"></div>
+          </div>
+        </div>
+        <div id="uploadResult" class="mt-6 hidden fade-in">
+          <div class="bg-green-50 border border-green-200 rounded-2xl p-6">
+            <div class="flex items-center mb-3">
+              <i class="fas fa-check-circle text-green-500 text-xl mr-2"></i>
+              <h3 class="text-lg font-bold text-gray-800">File Berhasil Diupload!</h3>
+            </div>
+            <div class="space-y-3">
+              <div>
+                <label class="text-sm font-medium text-gray-600">URL File:</label>
+                <div class="flex items-center mt-1">
+                  <input type="text" id="fileUrl" readonly class="flex-1 bg-white border border-gray-300 rounded-l-lg px-4 py-2 text-gray-700 focus:outline-none">
+                  <button onclick="copyToClipboard('fileUrl')" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-r-lg transition duration-200">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <label class="text-sm font-medium text-gray-600">Filename:</label>
+                  <p id="fileName" class="texpp📲t-gray-800 font-medium"></p>
+                </div>
+                <div>
+                  <label class="text-sm font-medium text-gray-600">Size:</label>
+                  <p id="fileSize" class="text-gray-800 font-medium"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl shadow-xl p-6 fade-in" style="animation-delay: 0.2s">
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="text-2xl font-bold text-gray-800 flex items-center">
+            <i class="fas fa-link text-green-500 mr-3"></i>
+            URL Shortener
+          </h2>
+          <span class="bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full">GitHub Gist</span>
+        </div>
+        <div class="mb-6">
+          <label class="block text-gray-700 text-sm font-bold mb-3" for="longUrl">
+            <i class="fas fa-globe mr-2"></i>URL Tujuan
+          </label>
+          <input type="url" id="longUrl" placeholder="https://example.com/very-long-url-path" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200 transition duration-200">
+        </div>
+        <div class="mb-6">
+          <label class="block text-gray-700 text-sm font-bold mb-3" for="customId">
+            <i class="fas fa-tag mr-2"></i>Custom ID (Opsional)
+          </label>
+          <input type="text" id="customId" placeholder="my-custom-link" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200 transition duration-200">
+          <p class="text-xs text-gray-500 mt-2">Jika dikosongkan, akan generate ID otomatis</p>
+        </div>
+        <button onclick="createShortUrl()" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-4 rounded-lg transition duration-200 flex items-center justify-center transform hover:scale-105" id="shortenBtn">
+          <i class="fas fa-compress-alt mr-2"></i>
+          Buat Short URL
+        </button>
+        <div id="shortenResult" class="mt-6 hidden fade-in">
+          <div class="bg-green-50 border border-green-200 rounded-2xl p-6">
+            <div class="flex items-center mb-3">
+              <i class="fas fa-check-circle text-green-500 text-xl mr-2"></i>
+              <h3 class="text-lg font-bold text-gray-800">Short URL Berhasil Dibuat!</h3>
+            </div>
+            <div class="space-y-3">
+              <div>
+                <label class="text-sm font-medium text-gray-600">Short URL:</label>
+                <div class="flex items-center mt-1">
+                  <input type="text" id="shortUrl" readonly class="flex-1 bg-white border border-gray-300 rounded-l-lg px-4 py-2 text-gray-700 focus:outline-none">
+                  <button onclick="copyToClipboard('shortUrl')" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-r-lg transition duration-200">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <label class="text-sm font-medium text-gray-600">ID:</label>
+                  <p id="urlId" class="text-gray-800 font-medium"></p>
+                </div>
+                <div>
+                  <label class="text-sm font-medium text-gray-600">URL Asli:</label>
+                  <p id="originalUrl" class="text-gray-800 font-medium truncate"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center text-slate-600 mt-12">
+      <p><i class="fas fa-star text-amber-500"></i> Made by <a class="text-blue-500 font-extrabold" href="https://wa.me/6282250423696">NineTwelve</a> | API Key: <code class="bg-gray-100 px-2 py-1 rounded">nvxc</code></p>
+    </div>
+  </div>
+</body>
+</html>

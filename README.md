@@ -1,0 +1,1 @@
+Upload file ke NVX Cloud dan dapatkan permanent live URL, serta pendekkan link panjang yang mengganggu menggunakan NVX Cloud URL Shortener dan dapatkan URL versi pendek.

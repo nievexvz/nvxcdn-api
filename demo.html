@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub CDN & URL Shortener Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-gray-800 mb-4">
+                GitHub CDN & URL Shortener
+            </h1>
+            <p class="text-gray-600 text-lg">
+                Demo untuk menguji API Upload File dan URL Shortener
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- CDN Upload Section -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                    <i class="fas fa-cloud-upload-alt text-blue-500 mr-3"></i>
+                    CDN File Upload
+                </h2>
+                
+                <div class="mb-6">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="fileInput">
+                        Pilih File (Maks. 25MB)
+                    </label>
+                    <input 
+                        type="file" 
+                        id="fileInput" 
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        accept="*/*"
+                    >
+                </div>
+
+                <button 
+                    onclick="uploadFile()"
+                    class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-md transition duration-200 flex items-center justify-center"
+                    id="uploadBtn"
+                >
+                    <i class="fas fa-upload mr-2"></i>
+                    Upload File
+                </button>
+
+                <div id="uploadResult" class="mt-6 hidden">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-3">Hasil Upload:</h3>
+                    <div class="bg-gray-50 p-4 rounded-md">
+                        <div class="mb-2">
+                            <strong class="text-gray-700">URL File:</strong>
+                            <a id="fileUrl" href="#" target="_blank" class="text-blue-500 hover:text-blue-600 break-all ml-2"></a>
+                        </div>
+                        <div class="mb-2">
+                            <strong class="text-gray-700">Filename:</strong>
+                            <span id="fileName" class="text-gray-600 ml-2"></span>
+                        </div>
+                        <div>
+                            <strong class="text-gray-700">Size:</strong>
+                            <span id="fileSize" class="text-gray-600 ml-2"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="uploadProgress" class="mt-4 hidden">
+                    <div class="flex items-center justify-between mb-1">
+                        <span class="text-sm text-gray-600">Upload Progress</span>
+                        <span id="progressPercent" class="text-sm text-gray-600">0%</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div id="progressBar" class="bg-blue-500 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- URL Shortener Section -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                    <i class="fas fa-link text-green-500 mr-3"></i>
+                    URL Shortener
+                </h2>
+                
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="longUrl">
+                        URL Tujuan
+                    </label>
+                    <input 
+                        type="url" 
+                        id="longUrl" 
+                        placeholder="https://example.com/very-long-url"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                    >
+                </div>
+
+                <div class="mb-6">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="customId">
+                        Custom ID (Opsional)
+                    </label>
+                    <input 
+                        type="text" 
+                        id="customId" 
+                        placeholder="my-custom-id"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                    >
+                </div>
+
+                <button 
+                    onclick="createShortUrl()"
+                    class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded-md transition duration-200 flex items-center justify-center"
+                    id="shortenBtn"
+                >
+                    <i class="fas fa-compress-alt mr-2"></i>
+                    Buat Short URL
+                </button>
+
+                <div id="shortenResult" class="mt-6 hidden">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-3">Short URL Berhasil Dibuat:</h3>
+                    <div class="bg-gray-50 p-4 rounded-md">
+                        <div class="mb-2">
+                            <strong class="text-gray-700">Short URL:</strong>
+                            <a id="shortUrl" href="#" target="_blank" class="text-green-500 hover:text-green-600 break-all ml-2"></a>
+                        </div>
+                        <div class="mb-2">
+                            <strong class="text-gray-700">ID:</strong>
+                            <span id="urlId" class="text-gray-600 ml-2"></span>
+                        </div>
+                        <div>
+                            <strong class="text-gray-700">URL Asli:</strong>
+                            <span id="originalUrl" class="text-gray-600 ml-2 break-all"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Files & URLs Section -->
+        <div class="mt-12 bg-white rounded-lg shadow-lg p-6">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <i class="fas fa-history text-purple-500 mr-3"></i>
+                Riwayat
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-700 mb-4">File Terupload</h3>
+                    <div id="recentFiles" class="space-y-3">
+                        <p class="text-gray-500 text-center py-4">Belum ada file yang diupload</p>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-700 mb-4">Short URLs</h3>
+                    <div id="recentUrls" class="space-y-3">
+                        <p class="text-gray-500 text-center py-4">Belum ada short URL yang dibuat</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- API Status -->
+        <div class="mt-8 text-center">
+            <div id="apiStatus" class="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium">
+                <i class="fas fa-circle mr-2"></i>
+                <span>Mengecek status API...</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Konfigurasi API
+        const API_BASE = 'http://localhost:6767';
+        const API_KEY = 'nvxc';
+
+        // Cek status API saat halaman dimuat
+        checkApiStatus();
+
+        // Fungsi untuk menampilkan notifikasi
+        function showNotification(message, type = 'info') {
+            const colors = {
+                success: 'bg-green-500',
+                error: 'bg-red-500',
+                info: 'bg-blue-500'
+            };
+
+            const notification = document.createElement('div');
+            notification.className = `fixed top-4 right-4 ${colors[type]} text-white px-6 py-3 rounded-lg shadow-lg transform transition-transform duration-300 translate-x-full`;
+            notification.innerHTML = `
+                <div class="flex items-center">
+                    <i class="fas fa-${type === 'success' ? 'check' : type === 'error' ? 'exclamation-triangle' : 'info'} mr-2"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+
+            document.body.appendChild(notification);
+
+            // Animasi masuk
+            setTimeout(() => {
+                notification.classList.remove('translate-x-full');
+            }, 100);
+
+            // Animasi keluar setelah 5 detik
+            setTimeout(() => {
+                notification.classList.add('translate-x-full');
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 5000);
+        }
+
+        // Fungsi untuk cek status API
+        async function checkApiStatus() {
+            const statusElement = document.getElementById('apiStatus');
+            try {
+                const response = await fetch(`${API_BASE}/health`);
+                if (response.ok) {
+                    statusElement.className = 'inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-green-100 text-green-800';
+                    statusElement.innerHTML = '<i class="fas fa-circle mr-2"></i><span>API Online</span>';
+                } else {
+                    throw new Error('API tidak merespon');
+                }
+            } catch (error) {
+                statusElement.className = 'inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-red-100 text-red-800';
+                statusElement.innerHTML = '<i class="fas fa-circle mr-2"></i><span>API Offline - Pastikan server berjalan di localhost:6767</span>';
+            }
+        }
+
+        // Fungsi untuk upload file
+        async function uploadFile() {
+            const fileInput = document.getElementById('fileInput');
+            const uploadBtn = document.getElementById('uploadBtn');
+            const uploadResult = document.getElementById('uploadResult');
+            const uploadProgress = document.getElementById('uploadProgress');
+            const progressBar = document.getElementById('progressBar');
+            const progressPercent = document.getElementById('progressPercent');
+
+            if (!fileInput.files[0]) {
+                showNotification('Pilih file terlebih dahulu', 'error');
+                return;
+            }
+
+            const file = fileInput.files[0];
+            
+            // Validasi ukuran file (25MB)
+            if (file.size > 25 * 1024 * 1024) {
+                showNotification('Ukuran file melebihi 25MB', 'error');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('file', file);
+
+            try {
+                // Tampilkan progress bar
+                uploadProgress.classList.remove('hidden');
+                uploadBtn.disabled = true;
+                uploadBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Uploading...';
+
+                const xhr = new XMLHttpRequest();
+                
+                xhr.upload.addEventListener('progress', (e) => {
+                    if (e.lengthComputable) {
+                        const percentComplete = (e.loaded / e.total) * 100;
+                        progressBar.style.width = percentComplete + '%';
+                        progressPercent.textContent = Math.round(percentComplete) + '%';
+                    }
+                });
+
+                xhr.addEventListener('load', () => {
+                    if (xhr.status === 200) {
+                        const response = JSON.parse(xhr.responseText);
+                        if (response.success) {
+                            // Tampilkan hasil
+                            document.getElementById('fileUrl').href = response.data.url;
+                            document.getElementById('fileUrl').textContent = response.data.url;
+                            document.getElementById('fileName').textContent = response.data.filename;
+                            document.getElementById('fileSize').textContent = formatFileSize(response.data.size);
+                            
+                            uploadResult.classList.remove('hidden');
+                            addToRecentFiles(response.data);
+                            showNotification('File berhasil diupload!', 'success');
+                        } else {
+                            throw new Error(response.message);
+                        }
+                    } else {
+                        throw new Error('Upload gagal');
+                    }
+                });
+
+                xhr.addEventListener('error', () => {
+                    throw new Error('Terjadi kesalahan saat upload');
+                });
+
+                xhr.open('POST', `${API_BASE}/api/v1/cdn`);
+                xhr.setRequestHeader('x-api-key', API_KEY);
+                xhr.send(formData);
+
+            } catch (error) {
+                showNotification(error.message, 'error');
+            } finally {
+                // Reset button dan progress
+                uploadBtn.disabled = false;
+                uploadBtn.innerHTML = '<i class="fas fa-upload mr-2"></i>Upload File';
+                setTimeout(() => {
+                    uploadProgress.classList.add('hidden');
+                    progressBar.style.width = '0%';
+                    progressPercent.textContent = '0%';
+                }, 2000);
+            }
+        }
+
+        // Fungsi untuk membuat short URL
+        async function createShortUrl() {
+            const longUrl = document.getElementById('longUrl').value;
+            const customId = document.getElementById('customId').value;
+            const shortenBtn = document.getElementById('shortenBtn');
+            const shortenResult = document.getElementById('shortenResult');
+
+            if (!longUrl) {
+                showNotification('Masukkan URL tujuan', 'error');
+                return;
+            }
+
+            try {
+                shortenBtn.disabled = true;
+                shortenBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Memproses...';
+
+                const response = await fetch(`${API_BASE}/api/v1/short`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'x-api-key': API_KEY
+                    },
+                    body: JSON.stringify({
+                        url: longUrl,
+                        customId: customId || undefined
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    // Tampilkan hasil
+                    document.getElementById('shortUrl').href = data.data.short_url;
+                    document.getElementById('shortUrl').textContent = data.data.short_url;
+                    document.getElementById('urlId').textContent = data.data.id;
+                    document.getElementById('originalUrl').textContent = data.data.original_url;
+                    
+                    shortenResult.classList.remove('hidden');
+                    addToRecentUrls(data.data);
+                    showNotification('Short URL berhasil dibuat!', 'success');
+                    
+                    // Reset form
+                    document.getElementById('longUrl').value = '';
+                    document.getElementById('customId').value = '';
+                } else {
+                    throw new Error(data.message);
+                }
+
+            } catch (error) {
+                showNotification(error.message, 'error');
+            } finally {
+                shortenBtn.disabled = false;
+                shortenBtn.innerHTML = '<i class="fas fa-compress-alt mr-2"></i>Buat Short URL';
+            }
+        }
+
+        // Fungsi untuk menambahkan file ke riwayat
+        function addToRecentFiles(fileData) {
+            const recentFiles = document.getElementById('recentFiles');
+            
+            // Hapus placeholder jika ada
+            if (recentFiles.querySelector('p')) {
+                recentFiles.innerHTML = '';
+            }
+
+            const fileElement = document.createElement('div');
+            fileElement.className = 'flex items-center justify-between p-3 bg-gray-50 rounded-lg';
+            fileElement.innerHTML = `
+                <div class="flex-1 min-w-0">
+                    <div class="flex items-center">
+                        <i class="fas fa-file text-blue-500 mr-2"></i>
+                        <span class="text-sm font-medium text-gray-700 truncate">${fileData.filename}</span>
+                    </div>
+                    <a href="${fileData.url}" target="_blank" class="text-xs text-blue-500 hover:text-blue-600 truncate block">${fileData.url}</a>
+                </div>
+                <button onclick="copyToClipboard('${fileData.url}')" class="ml-2 text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-copy"></i>
+                </button>
+            `;
+
+            recentFiles.insertBefore(fileElement, recentFiles.firstChild);
+        }
+
+        // Fungsi untuk menambahkan URL ke riwayat
+        function addToRecentUrls(urlData) {
+            const recentUrls = document.getElementById('recentUrls');
+            
+            // Hapus placeholder jika ada
+            if (recentUrls.querySelector('p')) {
+                recentUrls.innerHTML = '';
+            }
+
+            const urlElement = document.createElement('div');
+            urlElement.className = 'flex items-center justify-between p-3 bg-gray-50 rounded-lg';
+            urlElement.innerHTML = `
+                <div class="flex-1 min-w-0">
+                    <div class="flex items-center">
+                        <i class="fas fa-link text-green-500 mr-2"></i>
+                        <span class="text-sm font-medium text-gray-700">${urlData.id}</span>
+                    </div>
+                    <a href="${urlData.short_url}" target="_blank" class="text-xs text-green-500 hover:text-green-600 truncate block">${urlData.short_url}</a>
+                </div>
+                <button onclick="copyToClipboard('${urlData.short_url}')" class="ml-2 text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-copy"></i>
+                </button>
+            `;
+
+            recentUrls.insertBefore(urlElement, recentUrls.firstChild);
+        }
+
+        // Fungsi untuk copy teks ke clipboard
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                showNotification('Tersalin ke clipboard!', 'success');
+            }).catch(() => {
+                showNotification('Gagal menyalin', 'error');
+            });
+        }
+
+        // Fungsi untuk format ukuran file
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        // Event listeners untuk input enter
+        document.getElementById('longUrl').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                createShortUrl();
+            }
+        });
+
+        document.getElementById('customId').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                createShortUrl();
+            }
+        });
+    </script>
+</body>
+</html>
