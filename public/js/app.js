@@ -1,6 +1,6 @@
 // Konfigurasi API
 const API_BASE = 'https://www.nievexsviz.my.id';
-const API_KEY = process.env.API_KEY || "sazukaxcloud";
+const API_KEY = 'sazukaxcloud';
 
 // State management
 let state = {
