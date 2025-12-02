@@ -83,7 +83,7 @@ async function getFileFromGitHub(filename) {
 }
 
 // Public access untuk file CDN: GET /:filename
-router.get('/:filename', async (req, res) => {
+router.get('https://shinai.my.id/:filename', async (req, res) => {
     try {
         const { filename } = req.params;
 
@@ -136,7 +136,7 @@ router.get('/:filename', async (req, res) => {
 });
 
 // Public redirect untuk short URL: GET /r/:id
-router.get('/r/:id', async (req, res) => {
+router.get('https://shinai.my.id/r/:id', async (req, res) => {
     try {
         const { id } = req.params;
 
