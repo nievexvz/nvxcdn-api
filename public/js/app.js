@@ -1,5 +1,5 @@
 // Konfigurasi API
-const API_BASE = window.location.origin;
+const API_BASE = 'https://www.nievexsviz.my.id';
 const API_KEY = 'nvxc';
 
 // State management
