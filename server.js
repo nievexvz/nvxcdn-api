@@ -16,8 +16,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes dengan API Key protection untuk API
-app.use('/api/v1/cdn', authMiddleware, require('./routes/cdn'));
-app.use('/api/v1/short', authMiddleware, require('./routes/short'));
+app.use('/api/4/cdn', authMiddleware, require('./routes/cdn'));
+app.use('/api/4/short', authMiddleware, require('./routes/short'));
 
 // Public routes untuk akses file dan redirect
 app.use('/', require('./routes/public'));
