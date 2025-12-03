@@ -1,5 +1,5 @@
 // Konfigurasi API
-const API_BASE = 'https://nievexsviz.my.id';
+const API_BASE = 'https://www.shinai.my.id';
 const API_KEY = 'sazukaxcmv';
 
 // State management
@@ -65,6 +65,7 @@ function handleFileSelect(file) {
     }
 }
 
+/* 
 // Fungsi untuk menampilkan notifikasi
 function showNotification(message, type = 'info') {
     // Hapus notifikasi sebelumnya
@@ -114,7 +115,7 @@ function showNotification(message, type = 'info') {
             }
         }, 500);
     }, 4000);
-}
+} */
 
 // Fungsi untuk cek status API
 async function checkApiStatus() {
@@ -252,3 +253,4 @@ function updateStats() {
     // Save ke localStorage
     localStorage.setItem('cdnStats', JSON.stringify(state));
 }
+
