@@ -38,8 +38,8 @@ curl -X POST https://nievexsviz.my.id/api/v1/cdn \
 curl -X POST https://nievexsviz.my.id/api/v1/cdn \
   -H "x-api-key: nvxc" \
   -F "file=@./notes.txt"
-```
-
+```    
+   
 </details>
 
 ---
