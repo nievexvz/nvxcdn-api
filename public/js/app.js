@@ -192,7 +192,7 @@ async function uploadFile() {
             throw new Error('Terjadi kesalahan jaringan');
         });
 
-        xhr.open('POST', `${API_BASE}/api/v1/cdn`);
+        xhr.open('POST', `${API_BASE}/api/4/cdn`);
         xhr.setRequestHeader('x-api-key', API_KEY);
         xhr.send(formData);
 
