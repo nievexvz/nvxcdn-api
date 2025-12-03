@@ -1,5 +1,5 @@
 // Fungsi sederhana untuk generate short ID yang lebih reliable
-function generateShortId(length = 6) {
+function generateShortId(length = 8) {
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-';
     let result = '';
     for (let i = 0; i < length; i++) {
@@ -10,12 +10,12 @@ function generateShortId(length = 6) {
 
 // Fungsi untuk CDN files (6-8 karakter)
 function generateFileId() {
-    return generateShortId(6);
+    return generateShortId(8);
 }
 
 // Fungsi untuk short URLs (5-6 karakter)  
 function generateUrlId() {
-    return generateShortId(5);
+    return generateShortId(6);
 }
 
 module.exports = {
