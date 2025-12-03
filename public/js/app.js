@@ -1,6 +1,6 @@
 // Konfigurasi API
-const API_BASE = 'https://www.nievexsviz.my.id';
-const API_KEY = 'sazukaxcloud';
+const API_BASE = 'https://nievexsviz.my.id';
+const API_KEY = 'sazukaxcmv';
 
 // State management
 let state = {
