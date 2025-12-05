@@ -1,5 +1,5 @@
 // Konfigurasi API
-const API_BASE = 'https://www.shinai.my.id';
+const API_BASE = 'https://shinai.onrender.com';
 const API_KEY = 'sazukaxcmv';
 
 // State management
