@@ -1,214 +1,214 @@
 <!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="A Open-Source CDN Uploader and Link Shortener by NineTwelve" />
-  <meta name="author" content="NineTwelve" />
-  <title>NvCloud — CDN & URL Shortener</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://kit.fontawesome.com/676ca851f3.js" crossorigin="anonymous"></script>
-  <script src="/js/app.js" defer crossorigin="anonymous"></script>
-  <script src="/js/short.js" defer crossorigin="anonymous"></script>
-  <link rel="apple-touch-icon" href="/nv.ico" />
-  <link rel="icon" type="image/x-icon" href="/nv.ico" />
-  <link rel="stylesheet" href="/css/style.css" />
-  <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-  <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet" />
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            comspace: [
-              "Comfortaa",
-              "Space Grotesk",
-              "sans-serif"
-              
-            ]
-          },
-          keyframes: {
-            heartbeat: {
-              '0%, 100%': { transform: 'scale(1)' },
-              '14%': { transform: 'scale(1.3)' },
-              '28%': { transform: 'scale(1)' },
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A Open-Source CDN Uploader and Link Shortener by NineTwelve" />
+    <meta name="author" content="NineTwelve" />
+    <title>NvCloud — Files CDN & URL Shortener</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/676ca851f3.js" crossorigin="anonymous"></script>
+    <script src="https://www.shinai.my.id/js/app.js" defer crossorigin="anonymous"></script>
+    <script src="https://www.shinai.my.id/js/short.js" defer crossorigin="anonymous"></script>
+    <link rel="apple-touch-icon" href="/nv.ico" />
+    <link rel="icon" type="image/x-icon" href="/nv.ico" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet" />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              comspace: [
+                "Comfortaa",
+                "Space Grotesk",
+                "sans-serif"
+
+              ]
+            },
+            keyframes: {
+              heartbeat: {
+                '0%, 100%': { transform: 'scale(1)' },
+                '14%': { transform: 'scale(1.3)' },
+                '28%': { transform: 'scale(1)' },
+              },
+            },
+            animation: {
+              heartbeat: 'heartbeat 1.3s ease-in-out infinite',
             },
           },
-          animation: {
-            heartbeat: 'heartbeat 1.3s ease-in-out infinite',
-          },
         },
-      },
-    }
-  </script>
-</head>
-<body class="bg-gray-100 min-h-screen font-comspace">
-  <div class="container mx-auto px-10 py-8">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-      <div class="bg-gray-100 border-black border rounded-md shadow-[8px_8px_0_#000] p-6 fade-in" style="animation-delay: 0.1s">
-        <div class="text-center mb-8 fade-in">
-          <h1 class="text-4xl font-bold text-gray-800 mb-2">
-            CDN Uploader & URL Shortener
-          </h1>
-          <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+      }
+    </script>
+  </head>
+  <body class="bg-gray-100 min-h-screen font-comspace">
+    <div class="container mx-auto px-10 py-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+        <div class="bg-gray-100 border-black border rounded-md shadow-[8px_8px_0_#000] p-6 fade-in" style="animation-delay: 0.1s">
+          <div class="text-center mb-8 fade-in">
+            <h1 class="text-4xl font-bold text-gray-800 mb-2">
+              CDN Uploader & URL Shortener
+            </h1>
+            <p class="text-gray-600 text-lg max-w-2xl mx-auto">
             Made with <i class="fas fa-heart text-red-500 animate-heartbeat"></i> by Sazuka
-          </p>
-        </div>
-        <div class="mb-6">
-          <div class="border border-black rounded-xl p-4 text-center transition-all duration-300 active:bg-teal-400 shadow-[4px_4px_0_#000] bg-teal-300" id="dropZone">
-            <p class="text-gray-600 text-xl"><a onclick="document.getElementById('fileInput').click()" class="text-blue-600 underline -underline-offset-2 hover:text-blue-800" href="javascript:void(0)">Choose</a> a file or drop it here...</p>
-            <input type="file" id="fileInput" accept="*/*" class="hidden" />
+            </p>
           </div>
-          <div id="fileInfo" class="mt-3 hidden">
-            <div class="p-3">
-              <div class="flex items-center justify-center">
-                <div class="flex items-center">
-                  <i class="fas fa-file text-blue-500 mr-2"></i>
-                  <span id="selectedFileName" class="font-semibold text-xl text-gray-700 mr-1"></span>
+          <div class="mb-6">
+            <div class="border border-black rounded-xl p-4 text-center transition-all duration-300 active:bg-teal-400 shadow-[4px_4px_0_#000] bg-teal-300" id="dropZone">
+              <p class="text-gray-600 text-xl"><a onclick="document.getElementById('fileInput').click()" class="text-blue-600 underline -underline-offset-2 hover:text-blue-800" href="javascript:void(0)">Choose</a> a file or drop it here...</p>
+              <input type="file" id="fileInput" accept="*/*" class="hidden" />
+            </div>
+            <div id="fileInfo" class="mt-3 hidden">
+              <div class="p-3">
+                <div class="flex items-center justify-center">
+                  <div class="flex items-center">
+                    <i class="fas fa-file text-blue-500 mr-2"></i>
+                    <span id="selectedFileName" class="font-semibold text-xl text-gray-700 mr-1"></span>
+                  </div>
+                  <span id="selectedFileSize" class="text-md text-gray-600"></span>
                 </div>
-                <span id="selectedFileSize" class="text-md text-gray-600"></span>
               </div>
             </div>
           </div>
-        </div>
-        <div class="flex justify-center">
-          <button onclick="uploadFile()" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 px-4 rounded-lg transition duration-200 flex items-center justify-center transform hover:scale-95 shadow-[4px_4px_0_#000]" id="uploadBtn">
-            <i class="fas fa-upload mr-2"></i>
-            Upload
-          </button>
-        </div>
-        <div id="uploadProgress" class="mt-6 hidden">
-          <div class="flex items-center justify-between mb-2">
-            <span class="text-sm font-medium text-gray-700">Progress Upload</span>
-            <span id="progressPercent" class="text-sm font-bold text-blue-600">0%</span>
+          <div class="flex justify-center">
+            <button onclick="uploadFile()" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 px-4 rounded-lg transition duration-200 flex items-center justify-center transform hover:scale-95 shadow-[4px_4px_0_#000]" id="uploadBtn">
+              <i class="fas fa-upload mr-2"></i>
+              Upload
+            </button>
           </div>
-          <div class="w-full bg-gray-200 rounded-full h-3">
-            <div id="progressBar" class="bg-blue-500 h-3 rounded-full progress-bar" style="width: 0%"></div>
-          </div>
-        </div>
-        <div id="uploadResult" class="mt-6 hidden fade-in">
-          <div class="bg-gray-100 border border-black rounded-md p-6 shadow-[8px_8px_0_#000]">
-            <div class="flex items-center mb-3">
-              <i class="fas fa-check-circle text-green-600 text-xl mr-2"></i>Succes to upload
+          <div id="uploadProgress" class="mt-6 hidden">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-sm font-medium text-gray-700">Progress Upload</span>
+              <span id="progressPercent" class="text-sm font-bold text-blue-600">0%</span>
             </div>
-            <div class="space-y-3">
-              <div>
-                <label class="text-sm font-medium text-gray-600">URL File:</label>
-                <div class="flex items-center mt-1">
-                  <input type="text" id="fileUrl" readonly class="flex-1 bg-white border border-gray-300 rounded-l-lg px-4 py-2 text-gray-700 focus:outline-none">
-                  <button onclick="copyToClipboard('fileUrl')" class="bg-fuchsia-400 hover:bg-fuchsia-500 text-white px-4 py-2 rounded-r-lg transition duration-200">
-                    <i class="fas fa-copy"></i>
-                  </button>
-                </div>
+            <div class="w-full bg-gray-200 rounded-full h-3">
+              <div id="progressBar" class="bg-blue-500 h-3 rounded-full progress-bar" style="width: 0%"></div>
+            </div>
+          </div>
+          <div id="uploadResult" class="mt-6 hidden fade-in">
+            <div class="bg-gray-100 border border-black rounded-md p-6 shadow-[8px_8px_0_#000]">
+              <div class="flex items-center mb-3">
+                <i class="fas fa-check-circle text-green-600 text-xl mr-2"></i>Succes to upload
               </div>
-              <div class="grid grid-cols-2 gap-4">
+              <div class="space-y-3">
                 <div>
-                  <label class="text-sm font-medium text-gray-600">Filename:</label>
-                  <p id="fileName" class="texpp📲t-gray-800 font-medium"></p>
+                  <label class="text-sm font-medium text-gray-600">URL File:</label>
+                  <div class="flex items-center mt-1">
+                    <input type="text" id="fileUrl" readonly class="flex-1 bg-white border border-gray-300 rounded-l-lg px-4 py-2 text-gray-700 focus:outline-none">
+                    <button onclick="copyToClipboard('fileUrl')" class="bg-fuchsia-400 hover:bg-fuchsia-500 text-white px-4 py-2 rounded-r-lg transition duration-200">
+                      <i class="fas fa-copy"></i>
+                    </button>
+                  </div>
                 </div>
-                <div>
-                  <label class="text-sm font-medium text-gray-600">Size:</label>
-                  <p id="fileSize" class="text-gray-800 font-medium"></p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="bg-gray-100 rounded-md shadow-[8px_8px_0_#000] p-6 fade-in border border-black" style="animation-delay: 0.2s">
-        <div class="mb-6">
-          <label class="block text-gray-700 text-sm font-bold mb-3" for="longUrl">
-            <i class="fas fa-globe mr-2"></i>URL Tujuan
-          </label>
-          <input type="url" id="longUrl" placeholder="https://example.com/very-long-url-path" class="w-full px-4 py-3 border-2 border-black rounded-xl focus:outline-none transition duration-200 shadow-[4px_4px_0_#000] bg-yellow-200 text-black">
-        </div>
-        <div class="mb-6">
-          <label class="block text-gray-700 text-sm font-bold mb-3" for="customId">
-            <i class="fas fa-tag mr-2"></i>Custom ID (Opsional)
-          </label>
-          <input type="text" id="customId" placeholder="my-custom-link" class="w-full px-4 py-3 border-2 border-black rounded-xl focus:outline-none transition duration-200 shadow-[4px_4px_0_#000] bg-blue-300 text-black">
-          <p class="text-xs text-gray-500 mt-2">Jika dikosongkan, akan generate ID otomatis</p>
-        </div>
-        <div class="flex justify-center">
-          <button onclick="createShortUrl()" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 px-4 rounded-lg transition duration-200 flex items-center justify-center transform hover:scale-95 shadow-[4px_4px_0_#000]" id="shortenBtn">
-            <i class="fas fa-compress-alt mr-2"></i>
-            Buat Short URL
-          </button>
-        </div>
-        <div id="shortenResult" class="mt-6 hidden fade-in">
-          <div class="bg-gray-100 border border-black rounded-xl p-6 shadow-[8px_8px_0_#000]">
-            <div class="flex items-center mb-3">
-              <i class="fas fa-check-circle text-green-500 text-xl mr-2"></i>
-              <h3 class="text-lg font-bold text-gray-800">Success to Shorten</h3>
-            </div>
-            <div class="space-y-3">
-              <div>
-                <label class="text-sm font-medium text-gray-600">Short URL:</label>
-                <div class="flex items-center mt-1">
-                  <input type="text" id="shortUrl" readonly class="flex-1 bg-white border border-gray-300 rounded-l-lg px-4 py-2 text-gray-700 focus:outline-none">
-                  <button onclick="copyToClipboard('shortUrl')" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-r-lg transition duration-200">
-                    <i class="fas fa-copy"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="grid grid-cols-2 gap-4">
-                <div>
-                  <label class="text-sm font-medium text-gray-600">ID:</label>
-                  <p id="urlId" class="text-gray-800 font-medium"></p>
-                </div>
-                <div>
-                  <label class="text-sm font-medium text-gray-600">URL Asli:</label>
-                  <p id="originalUrl" class="text-gray-800 font-medium truncate"></p>
+                <div class="grid grid-cols-2 gap-4">
+                  <div>
+                    <label class="text-sm font-medium text-gray-600">Filename:</label>
+                    <p id="fileName" class="texpp📲t-gray-800 font-medium"></p>
+                  </div>
+                  <div>
+                    <label class="text-sm font-medium text-gray-600">Size:</label>
+                    <p id="fileSize" class="text-gray-800 font-medium"></p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="bg-rose-300 rounded-md shadow-[8px_8px_0_#000] p-6 fade-in border border-black" style="animation-delay: 0.3s">
-        <div class="flex justify-center">
-          <h1 class="text-4xl font-bold text-gray-800 mb-2">
-            Configuration
-          </h1>
+        <div class="bg-gray-100 rounded-md shadow-[8px_8px_0_#000] p-6 fade-in border border-black" style="animation-delay: 0.2s">
+          <div class="mb-6">
+            <label class="block text-gray-700 text-sm font-bold mb-3" for="longUrl">
+              <i class="fas fa-globe mr-2"></i>URL Tujuan
+            </label>
+            <input type="url" id="longUrl" placeholder="https://example.com/very-long-url-path" class="w-full px-4 py-3 border-2 border-black rounded-xl focus:outline-none transition duration-200 shadow-[4px_4px_0_#000] bg-yellow-200 text-black">
+          </div>
+          <div class="mb-6">
+            <label class="block text-gray-700 text-sm font-bold mb-3" for="customId">
+              <i class="fas fa-tag mr-2"></i>Custom ID (Opsional)
+            </label>
+            <input type="text" id="customId" placeholder="my-custom-link" class="w-full px-4 py-3 border-2 border-black rounded-xl focus:outline-none transition duration-200 shadow-[4px_4px_0_#000] bg-blue-300 text-black">
+            <p class="text-xs text-gray-500 mt-2">Jika dikosongkan, akan generate ID otomatis</p>
+          </div>
+          <div class="flex justify-center">
+            <button onclick="createShortUrl()" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 px-4 rounded-lg transition duration-200 flex items-center justify-center transform hover:scale-95 shadow-[4px_4px_0_#000]" id="shortenBtn">
+              <i class="fas fa-compress-alt mr-2"></i>
+              Buat Short URL
+            </button>
+          </div>
+          <div id="shortenResult" class="mt-6 hidden fade-in">
+            <div class="bg-gray-100 border border-black rounded-xl p-6 shadow-[8px_8px_0_#000]">
+              <div class="flex items-center mb-3">
+                <i class="fas fa-check-circle text-green-500 text-xl mr-2"></i>
+                <h3 class="text-lg font-bold text-gray-800">Success to Shorten</h3>
+              </div>
+              <div class="space-y-3">
+                <div>
+                  <label class="text-sm font-medium text-gray-600">Short URL:</label>
+                  <div class="flex items-center mt-1">
+                    <input type="text" id="shortUrl" readonly class="flex-1 bg-white border border-gray-300 rounded-l-lg px-4 py-2 text-gray-700 focus:outline-none">
+                    <button onclick="copyToClipboard('shortUrl')" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-r-lg transition duration-200">
+                      <i class="fas fa-copy"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                  <div>
+                    <label class="text-sm font-medium text-gray-600">ID:</label>
+                    <p id="urlId" class="text-gray-800 font-medium"></p>
+                  </div>
+                  <div>
+                    <label class="text-sm font-medium text-gray-600">URL Asli:</label>
+                    <p id="originalUrl" class="text-gray-800 font-medium truncate"></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <p class="text-xl font-bold text-gray-800">
+        <div class="bg-rose-300 rounded-md shadow-[8px_8px_0_#000] p-6 fade-in border border-black" style="animation-delay: 0.3s">
+          <div class="flex justify-center">
+            <h1 class="text-4xl font-bold text-gray-800 mb-2">
+              Documentation
+            </h1>
+          </div>
+          <p class="text-xl font-bold text-gray-800">
           <i class="fas fa-warning text-amber-500 mr-2"></i>
           Max file size: 25MB
-        </p>
-        <p class="text-xl font-bold text-gray-800">
+          </p>
+          <p class="text-xl font-bold text-gray-800">
           <i class="fas fa-server text-indigo-500 mr-2"></i>
           Endpoint:
-        </p>
-        <ul class="ml-10">
-          <li class="text-md text-gray-700 font-bold">https://shinai.my.id/cdn</li>
-          <li class="text-md text-gray-700 font-bold">htrps://shinai.my.id/short</li>
-        </ul>
-        <p class="text-xl font-bold text-gray-800">
-        <i class="fas fa-key text-red-500 mr-2"></i>
-        API Key: <span class="font-extrabold text-zinc-800">sazukaxcmv</span>
-      </p>
+          </p>
+          <ul class="ml-10">
+            <li class="text-md text-gray-700 font-bold">https://shinai.onrender.com/api/4/cdn</li>
+            <li class="text-md text-gray-700 font-bold">https://shinai.onrender.com/api/4/short</li>
+          </ul>
+          <p class="text-xl font-bold text-gray-800">
+          <i class="fas fa-key text-red-500 mr-2"></i>
+          API Key: <span class="font-extrabold text-zinc-800">sazukaxcmv</span>
+          </p>
+        </div>
+        <div class="bg-gray-100 rounded-md shadow-[8px_8px_0_#000] p-6 fade-in border border-black" style="animation-delay: 0.4s">
+          <div class="flex justify-center">
+            <h1 class="text-4xl font-bold text-gray-800 mb-2">Example Code</h1>
+          </div>
+          <div class="bg-gray-100">
+            <h2 class="text-2xl font-medium text-gray-800 mb-2">CDN:</h2>
+            <script src="https://gist.github.com/nievexvz/7ca765df2a2ea665fca89971c2bc657d.js"></script>
+          </div>
+          <hr class="border-gray-500 mb-3 mt-3" />
+          <div class="bg-gray-100">
+            <h2 class="text-2xl font-medium text-gray-800 mb-2">Shortener:</h2>
+            <script src="https://gist.github.com/nievexvz/e93fbd5200a89b8fcd34f6f17cec0174.js"></script>
+          </div>
+        </div>
       </div>
-      <div class="bg-gray-100 rounded-md shadow-[8px_8px_0_#000] p-6 fade-in border border-black" style="animation-delay: 0.3s">
-        <div class="flex justify-center">
-          <h1 class="text-4xl font-bold text-gray-800 mb-2">Example Code</h1>
-        </div>
-        <div class="bg-gray-100">
-          <h2 class="text-2xl font-medium text-gray-800 mb-2">CDN:</h2>
-          <script src="https://gist.github.com/nievexvz/7ca765df2a2ea665fca89971c2bc657d.js"></script>
-        </div>
-        <hr class="border-gray-500 mb-3 mt-3" />
-        <div class="bg-gray-100">
-          <h2 class="text-2xl font-medium text-gray-800 mb-2">Shortener:</h2>
-          <script src="https://gist.github.com/nievexvz/e93fbd5200a89b8fcd34f6f17cec0174.js"></script>
-        </div>
+      <div class="text-center text-slate-600 mt-12">
+        <p><i class="fas fa-code text-amber-500"></i> Developed by <a class="text-blue-500 font-extrabold" href="https://wa.me/6282250423696">NineTwelve</a> | <a href="https://nvcloud-docs.pages.dev" class="text-blue-500 font-bold">Docs</a></p>
       </div>
     </div>
-    <div class="text-center text-slate-600 mt-12">
-      <p><i class="fas fa-code text-amber-500"></i> Developed by <a class="text-blue-500 font-extrabold" href="https://wa.me/6282250423696">NineTwelve</a> | <a href="https://nvcloud-docs.pages.dev" class="text-blue-500 font-bold">Docs</a></p>
-    </div>
-  </div>
-</body>
+  </body>
 </html>
