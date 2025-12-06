@@ -91,8 +91,8 @@ router.post('/', upload.single('file'), async (req, res) => {
         const responseData = {
             success: true,
             message: 'File berhasil diupload',
+            creator: creator,
             data: {
-                creator: creator,
                 id: fileId,
                 filename: filename,
                 originalName: originalName,

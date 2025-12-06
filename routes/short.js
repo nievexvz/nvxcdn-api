@@ -114,6 +114,7 @@ router.post('/', async (req, res) => {
         res.json({
             success: true,
             message: 'Short URL berhasil dibuat',
+            creator: 'NvLabs',
             data: {
                 id: shortId,
                 original_url: url,
