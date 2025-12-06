@@ -71,6 +71,8 @@ router.post('/', upload.single('file'), async (req, res) => {
         const fileId = generateFileId();
         const filename = `${fileId}.${extension}`;
 
+        const creator = 'NvLabs'
+
         console.log('Generated filename:', filename);
 
         // Upload ke GitHub
@@ -90,6 +92,7 @@ router.post('/', upload.single('file'), async (req, res) => {
             success: true,
             message: 'File berhasil diupload',
             data: {
+                creator: creator,
                 id: fileId,
                 filename: filename,
                 originalName: originalName,
