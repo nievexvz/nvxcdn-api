@@ -8,8 +8,8 @@
     <title>NvCloud — Files CDN & URL Shortener</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://kit.fontawesome.com/676ca851f3.js" crossorigin="anonymous"></script>
-    <script src="https://www.shinai.my.id/js/app.js" defer crossorigin="anonymous"></script>
-    <script src="https://www.shinai.my.id/js/short.js" defer crossorigin="anonymous"></script>
+    <script src="https://shinai.onrender.com/js/app.js" defer crossorigin="anonymous"></script>
+    <script src="https://shinai.onrender.com/js/short.js" defer crossorigin="anonymous"></script>
     <link rel="apple-touch-icon" href="/nv.ico" />
     <link rel="icon" type="image/x-icon" href="/nv.ico" />
     <link rel="stylesheet" href="/css/style.css" />
@@ -23,12 +23,7 @@
         theme: {
           extend: {
             fontFamily: {
-              comspace: [
-                "Comfortaa",
-                "Space Grotesk",
-                "sans-serif"
-
-              ]
+              comspace: ["Comfortaa", "Space Grotesk", "sans-serif"]
             },
             keyframes: {
               heartbeat: {
@@ -36,178 +31,269 @@
                 '14%': { transform: 'scale(1.3)' },
                 '28%': { transform: 'scale(1)' },
               },
+              float: {
+                '0%, 100%': { transform: 'translateY(0px)' },
+                '50%': { transform: 'translateY(-10px)' },
+              },
+              slideIn: {
+                '0%': { transform: 'translateX(-100%)', opacity: '0' },
+                '100%': { transform: 'translateX(0)', opacity: '1' },
+              },
             },
             animation: {
               heartbeat: 'heartbeat 1.3s ease-in-out infinite',
+              float: 'float 3s ease-in-out infinite',
+              slideIn: 'slideIn 0.5s ease-out',
             },
           },
         },
       }
     </script>
   </head>
-  <body class="bg-gray-100 min-h-screen font-comspace">
+  <body class="bg-gradient-to-br from-yellow-50 via-pink-50 to-purple-50 min-h-screen font-comspace">
+    <div class="bg-white border-b-4 border-black shadow-[0_8px_0_#000] sticky top-0 z-50">
+      <div class="container mx-auto px-10 py-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="bg-gradient-to-br from-purple-500 to-pink-500 p-3 rounded-xl border-2 border-black shadow-[4px_4px_0_#000] animate-float">
+              <i class="fas fa-cloud-upload-alt text-white text-2xl"></i>
+            </div>
+            <div>
+              <h1 class="text-2xl font-bold text-gray-800">NvCloud</h1>
+              <p class="text-xs text-gray-600">Fast & Simple Storage</p>
+            </div>
+          </div>
+          <a href="https://nvcloud-docs.pages.dev" class="bg-yellow-300 hover:bg-yellow-400 border-2 border-black px-4 py-2 rounded-lg font-bold shadow-[4px_4px_0_#000] active:scale-95 active:shadow-[2px_2px_0_#000] transition-all">
+            <i class="fas fa-book mr-2"></i>Docs
+          </a>
+        </div>
+      </div>
+    </div>
     <div class="container mx-auto px-10 py-8">
+      <div class="text-center mb-12 fade-in">
+        <h1 class="text-5xl md:text-6xl font-bold text-gray-800 mb-4">
+          CDN Uploader & URL Shortener
+        </h1>
+        <p class="text-gray-600 text-xl max-w-2xl mx-auto">
+        Upload your files and shorten your URLs with ease. Made with <i class="fas fa-heart text-red-500 animate-heartbeat"></i> by <span class="font-bold text-purple-600">Sazuka</span>
+        </p>
+      </div>
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-        <div class="bg-gray-100 border-black border rounded-md shadow-[8px_8px_0_#000] p-6 fade-in" style="animation-delay: 0.1s">
-          <div class="text-center mb-8 fade-in">
-            <h1 class="text-4xl font-bold text-gray-800 mb-2">
-              CDN Uploader & URL Shortener
-            </h1>
-            <p class="text-gray-600 text-lg max-w-2xl mx-auto">
-            Made with <i class="fas fa-heart text-red-500 animate-heartbeat"></i> by Sazuka
-            </p>
+        <div class="bg-gradient-to-br from-blue-100 to-cyan-100 border-4 border-black rounded-2xl shadow-[10px_10px_0_#000] p-8 fade-in hover-lift" style="animation-delay: 0.1s">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="bg-blue-500 p-3 rounded-xl border-2 border-black shadow-[4px_4px_0_#000]">
+              <i class="fas fa-upload text-white text-xl"></i>
+            </div>
+            <h2 class="text-3xl font-bold text-gray-800">File Upload</h2>
           </div>
           <div class="mb-6">
-            <div class="border border-black rounded-xl p-4 text-center transition-all duration-300 active:bg-teal-400 shadow-[4px_4px_0_#000] bg-teal-300" id="dropZone">
-              <p class="text-gray-600 text-xl"><a onclick="document.getElementById('fileInput').click()" class="text-blue-600 underline -underline-offset-2 hover:text-blue-800" href="javascript:void(0)">Choose</a> a file or drop it here...</p>
+            <div class="border-4 border-dashed border-black rounded-2xl p-8 text-center transition-all duration-300 active:bg-teal-400 shadow-[6px_6px_0_#000] bg-teal-300 hover:bg-teal-400 cursor-pointer" id="dropZone">
+              <i class="fas fa-cloud-upload-alt text-6xl text-gray-700 mb-4"></i>
+              <p class="text-gray-700 text-xl font-bold mb-2">Drop your file here</p>
+              <p class="text-gray-600">or <a onclick="document.getElementById('fileInput').click()" class="text-blue-600 underline hover:text-blue-800 font-bold cursor-pointer" href="javascript:void(0)">browse</a> to upload</p>
               <input type="file" id="fileInput" accept="*/*" class="hidden" />
             </div>
-            <div id="fileInfo" class="mt-3 hidden">
-              <div class="p-3">
-                <div class="flex items-center justify-center">
+            <div id="fileInfo" class="mt-4 hidden">
+              <div class="bg-white border-3 border-black rounded-xl p-4 shadow-[4px_4px_0_#000]">
+                <div class="flex items-center justify-between">
                   <div class="flex items-center">
-                    <i class="fas fa-file text-blue-500 mr-2"></i>
-                    <span id="selectedFileName" class="font-semibold text-xl text-gray-700 mr-1"></span>
+                    <div class="bg-blue-500 p-2 rounded-lg mr-3">
+                      <i class="fas fa-file text-white text-xl"></i>
+                    </div>
+                    <div>
+                      <span id="selectedFileName" class="font-bold text-lg text-gray-800 block"></span>
+                      <span id="selectedFileSize" class="text-sm text-gray-600"></span>
+                    </div>
                   </div>
-                  <span id="selectedFileSize" class="text-md text-gray-600"></span>
                 </div>
               </div>
             </div>
           </div>
           <div class="flex justify-center">
-            <button onclick="uploadFile()" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 px-4 rounded-lg transition duration-200 flex items-center justify-center transform hover:scale-95 shadow-[4px_4px_0_#000]" id="uploadBtn">
-              <i class="fas fa-upload mr-2"></i>
-              Upload
+            <button onclick="uploadFile()" class="bg-gradient-to-r from-orange-400 to-pink-500 hover:from-orange-500 hover:to-pink-600 text-white font-bold py-4 px-8 rounded-xl transition duration-200 flex items-center justify-center active:scale-95 active:shadow-[2px_2px_0_#000] shadow-[6px_6px_0_#000] border-2 border-black text-lg" id="uploadBtn">
+              <i class="fas fa-rocket mr-2"></i>
+              Upload Now
             </button>
           </div>
           <div id="uploadProgress" class="mt-6 hidden">
-            <div class="flex items-center justify-between mb-2">
-              <span class="text-sm font-medium text-gray-700">Progress Upload</span>
-              <span id="progressPercent" class="text-sm font-bold text-blue-600">0%</span>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-sm font-bold text-gray-700">Upload Progress</span>
+              <span id="progressPercent" class="text-sm font-bold text-blue-600 bg-blue-100 px-3 py-1 rounded-full border-2 border-black">0%</span>
             </div>
-            <div class="w-full bg-gray-200 rounded-full h-3">
-              <div id="progressBar" class="bg-blue-500 h-3 rounded-full progress-bar" style="width: 0%"></div>
+            <div class="w-full bg-gray-300 rounded-full h-4 border-2 border-black shadow-[4px_4px_0_#000]">
+              <div id="progressBar" class="bg-gradient-to-r from-blue-500 to-purple-500 h-full rounded-full progress-bar transition-all duration-300" style="width: 0%"></div>
             </div>
           </div>
           <div id="uploadResult" class="mt-6 hidden fade-in">
-            <div class="bg-gray-100 border border-black rounded-md p-6 shadow-[8px_8px_0_#000]">
-              <div class="flex items-center mb-3">
-                <i class="fas fa-check-circle text-green-600 text-xl mr-2"></i>Succes to upload
+            <div class="bg-white border-3 border-black rounded-xl p-6 shadow-[8px_8px_0_#000]">
+              <div class="flex items-center mb-4 bg-green-100 p-3 rounded-lg border-2 border-black">
+                <i class="fas fa-check-circle text-green-600 text-2xl mr-3"></i>
+                <span class="font-bold text-green-800 text-lg">Upload Successful!</span>
               </div>
-              <div class="space-y-3">
+              <div class="space-y-4">
                 <div>
-                  <label class="text-sm font-medium text-gray-600">URL File:</label>
-                  <div class="flex items-center mt-1">
-                    <input type="text" id="fileUrl" readonly class="flex-1 bg-white border border-gray-300 rounded-l-lg px-4 py-2 text-gray-700 focus:outline-none">
-                    <button onclick="copyToClipboard('fileUrl')" class="bg-fuchsia-400 hover:bg-fuchsia-500 text-white px-4 py-2 rounded-r-lg transition duration-200">
-                      <i class="fas fa-copy"></i>
+                  <label class="text-sm font-bold text-gray-600 mb-2 block">FILE URL:</label>
+                  <div class="flex items-center">
+                    <input type="text" id="fileUrl" readonly class="flex-1 bg-gray-50 border-2 border-black rounded-l-xl px-4 py-3 text-gray-700 focus:outline-none font-mono text-sm">
+                    <button onclick="copyToClipboard('fileUrl')" class="bg-fuchsia-400 hover:bg-fuchsia-500 text-white px-5 py-3 rounded-r-xl transition duration-200 border-2 border-l-0 border-black font-bold">
+                      <i class="fas fa-copy mr-1"></i>Copy
                     </button>
                   </div>
                 </div>
                 <div class="grid grid-cols-2 gap-4">
-                  <div>
-                    <label class="text-sm font-medium text-gray-600">Filename:</label>
-                    <p id="fileName" class="texpp📲t-gray-800 font-medium"></p>
+                  <div class="bg-gray-50 p-3 rounded-lg border-2 border-black">
+                    <label class="text-xs font-bold text-gray-500 uppercase">Filename</label>
+                    <p id="fileName" class="text-gray-800 font-bold truncate"></p>
                   </div>
-                  <div>
-                    <label class="text-sm font-medium text-gray-600">Size:</label>
-                    <p id="fileSize" class="text-gray-800 font-medium"></p>
+                  <div class="bg-gray-50 p-3 rounded-lg border-2 border-black">
+                    <label class="text-xs font-bold text-gray-500 uppercase">Size</label>
+                    <p id="fileSize" class="text-gray-800 font-bold"></p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="bg-gray-100 rounded-md shadow-[8px_8px_0_#000] p-6 fade-in border border-black" style="animation-delay: 0.2s">
+        <div class="bg-gradient-to-br from-purple-100 to-pink-100 rounded-2xl shadow-[10px_10px_0_#000] p-8 fade-in border-4 border-black hover-lift" style="animation-delay: 0.2s">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="bg-purple-500 p-3 rounded-xl border-2 border-black shadow-[4px_4px_0_#000]">
+              <i class="fas fa-link text-white text-xl"></i>
+            </div>
+            <h2 class="text-3xl font-bold text-gray-800">URL Shortener</h2>
+          </div>
           <div class="mb-6">
             <label class="block text-gray-700 text-sm font-bold mb-3" for="longUrl">
-              <i class="fas fa-globe mr-2"></i>URL Tujuan
+              <i class="fas fa-globe mr-2"></i>DESTINATION URL
             </label>
-            <input type="url" id="longUrl" placeholder="https://example.com/very-long-url-path" class="w-full px-4 py-3 border-2 border-black rounded-xl focus:outline-none transition duration-200 shadow-[4px_4px_0_#000] bg-yellow-200 text-black">
+            <input type="url" id="longUrl" placeholder="https://example.com/very-long-url-path" class="w-full px-4 py-3 border-3 border-black rounded-xl focus:outline-none transition duration-200 shadow-[4px_4px_0_#000] bg-white text-black placeholder-gray-400 focus:shadow-[6px_6px_0_#000]">
           </div>
           <div class="mb-6">
             <label class="block text-gray-700 text-sm font-bold mb-3" for="customId">
-              <i class="fas fa-tag mr-2"></i>Custom ID (Opsional)
+              <i class="fas fa-tag mr-2"></i>CUSTOM ID (Optional)
             </label>
-            <input type="text" id="customId" placeholder="my-custom-link" class="w-full px-4 py-3 border-2 border-black rounded-xl focus:outline-none transition duration-200 shadow-[4px_4px_0_#000] bg-blue-300 text-black">
-            <p class="text-xs text-gray-500 mt-2">Jika dikosongkan, akan generate ID otomatis</p>
+            <input type="text" id="customId" placeholder="my-custom-link" class="w-full px-4 py-3 border-3 border-black rounded-xl focus:outline-none transition duration-200 shadow-[4px_4px_0_#000] bg-white text-black placeholder-gray-400 focus:shadow-[6px_6px_0_#000]">
+            <p class="text-xs text-gray-600 mt-2 font-semibold">
+            <i class="fas fa-info-circle mr-1"></i>Leave empty for auto-generated ID
+            </p>
           </div>
           <div class="flex justify-center">
-            <button onclick="createShortUrl()" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 px-4 rounded-lg transition duration-200 flex items-center justify-center transform hover:scale-95 shadow-[4px_4px_0_#000]" id="shortenBtn">
+            <button onclick="createShortUrl()" class="bg-gradient-to-r from-purple-400 to-pink-500 hover:from-purple-500 hover:to-pink-600 text-white font-bold py-4 px-8 rounded-xl transition duration-200 flex items-center justify-center shadow-[6px_6px_0_#000] border-2 border-black active:scale-95 active:shadow-[2px_2px_0_#000] text-lg" id="shortenBtn">
               <i class="fas fa-compress-alt mr-2"></i>
-              Buat Short URL
+              Shorten URL
             </button>
           </div>
           <div id="shortenResult" class="mt-6 hidden fade-in">
-            <div class="bg-gray-100 border border-black rounded-xl p-6 shadow-[8px_8px_0_#000]">
-              <div class="flex items-center mb-3">
-                <i class="fas fa-check-circle text-green-500 text-xl mr-2"></i>
-                <h3 class="text-lg font-bold text-gray-800">Success to Shorten</h3>
+            <div class="bg-white border-3 border-black rounded-xl p-6 shadow-[8px_8px_0_#000]">
+              <div class="flex items-center mb-4 bg-green-100 p-3 rounded-lg border-2 border-black">
+                <i class="fas fa-check-circle text-green-500 text-2xl mr-3"></i>
+                <h3 class="text-lg font-bold text-green-800">Successfully Shortened!</h3>
               </div>
-              <div class="space-y-3">
+              <div class="space-y-4">
                 <div>
-                  <label class="text-sm font-medium text-gray-600">Short URL:</label>
-                  <div class="flex items-center mt-1">
-                    <input type="text" id="shortUrl" readonly class="flex-1 bg-white border border-gray-300 rounded-l-lg px-4 py-2 text-gray-700 focus:outline-none">
-                    <button onclick="copyToClipboard('shortUrl')" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-r-lg transition duration-200">
-                      <i class="fas fa-copy"></i>
+                  <label class="text-sm font-bold text-gray-600 mb-2 block">SHORT URL:</label>
+                  <div class="flex items-center">
+                    <input type="text" id="shortUrl" readonly class="flex-1 bg-gray-50 border-2 border-black rounded-l-xl px-4 py-3 text-gray-700 focus:outline-none font-mono text-sm">
+                    <button onclick="copyToClipboard('shortUrl')" class="bg-green-500 hover:bg-green-600 text-white px-5 py-3 rounded-r-xl transition duration-200 border-2 border-l-0 border-black font-bold">
+                      <i class="fas fa-copy mr-1"></i>Copy
                     </button>
                   </div>
                 </div>
                 <div class="grid grid-cols-2 gap-4">
-                  <div>
-                    <label class="text-sm font-medium text-gray-600">ID:</label>
-                    <p id="urlId" class="text-gray-800 font-medium"></p>
+                  <div class="bg-gray-50 p-3 rounded-lg border-2 border-black">
+                    <label class="text-xs font-bold text-gray-500 uppercase">ID</label>
+                    <p id="urlId" class="text-gray-800 font-bold"></p>
                   </div>
-                  <div>
-                    <label class="text-sm font-medium text-gray-600">URL Asli:</label>
-                    <p id="originalUrl" class="text-gray-800 font-medium truncate"></p>
+                  <div class="bg-gray-50 p-3 rounded-lg border-2 border-black">
+                    <label class="text-xs font-bold text-gray-500 uppercase">Original</label>
+                    <p id="originalUrl" class="text-gray-800 font-bold truncate"></p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="bg-rose-300 rounded-md shadow-[8px_8px_0_#000] p-6 fade-in border border-black" style="animation-delay: 0.3s">
-          <div class="flex justify-center">
-            <h1 class="text-4xl font-bold text-gray-800 mb-2">
-              Documentation
-            </h1>
+        <div class="bg-gradient-to-br from-rose-200 to-orange-200 rounded-2xl shadow-[10px_10px_0_#000] p-8 fade-in border-4 border-black hover-lift" style="animation-delay: 0.3s">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="bg-rose-500 p-3 rounded-xl border-2 border-black shadow-[4px_4px_0_#000]">
+              <i class="fas fa-book text-white text-xl"></i>
+            </div>
+            <h2 class="text-3xl font-bold text-gray-800">Documentation</h2>
           </div>
-          <p class="text-xl font-bold text-gray-800">
-          <i class="fas fa-warning text-amber-500 mr-2"></i>
-          Max file size: 25MB
-          </p>
-          <p class="text-xl font-bold text-gray-800">
-          <i class="fas fa-server text-indigo-500 mr-2"></i>
-          Endpoint:
-          </p>
-          <ul class="ml-10">
-            <li class="text-md text-gray-700 font-bold">https://shinai.onrender.com/api/4/cdn</li>
-            <li class="text-md text-gray-700 font-bold">https://shinai.onrender.com/api/4/short</li>
-          </ul>
-          <p class="text-xl font-bold text-gray-800">
-          <i class="fas fa-key text-red-500 mr-2"></i>
-          API Key: <span class="font-extrabold text-zinc-800">sazukaxcmv</span>
-          </p>
+          <div class="space-y-4">
+            <div class="bg-white p-4 rounded-xl border-3 border-black shadow-[4px_4px_0_#000]">
+              <p class="text-lg font-bold text-gray-800 flex items-center">
+              <i class="fas fa-warning text-amber-500 mr-3 text-2xl"></i>
+              <span>Max file size: <span class="text-amber-600">25MB</span></span>
+              </p>
+            </div>
+            <div class="bg-white p-4 rounded-xl border-3 border-black shadow-[4px_4px_0_#000]">
+              <p class="text-lg font-bold text-gray-800 mb-3 flex items-center">
+              <i class="fas fa-server text-indigo-500 mr-3 text-2xl"></i>
+              API Endpoints:
+              </p>
+              <div class="space-y-2">
+                <div class="bg-gray-50 p-3 rounded-lg border-2 border-black font-mono text-sm">
+                  <i class="fas fa-upload text-blue-500 mr-2"></i>
+                  <span class="font-bold">https://shinai.onrender.com/api/4/cdn</span>
+                </div>
+                <div class="bg-gray-50 p-3 rounded-lg border-2 border-black font-mono text-sm">
+                  <i class="fas fa-link text-purple-500 mr-2"></i>
+                  <span class="font-bold">https://shinai.onrender.com/api/4/short</span>
+                </div>
+              </div>
+            </div>
+            <div class="bg-white p-4 rounded-xl border-3 border-black shadow-[4px_4px_0_#000]">
+              <p class="text-lg font-bold text-gray-800 flex items-center">
+              <i class="fas fa-key text-red-500 mr-3 text-2xl"></i>
+              API Key: 
+              <span class="ml-2 bg-gradient-to-r from-red-500 to-pink-500 text-white px-4 py-1 rounded-lg font-mono border-2 border-black">sazukaxcmv</span>
+              </p>
+            </div>
+          </div>
         </div>
-        <div class="bg-gray-100 rounded-md shadow-[8px_8px_0_#000] p-6 fade-in border border-black" style="animation-delay: 0.4s">
-          <div class="flex justify-center">
-            <h1 class="text-4xl font-bold text-gray-800 mb-2">Example Code</h1>
+        <div class="bg-gradient-to-br from-green-100 to-emerald-100 rounded-2xl shadow-[10px_10px_0_#000] p-8 fade-in border-4 border-black hover-lift" style="animation-delay: 0.4s">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="bg-green-500 p-3 rounded-xl border-2 border-black shadow-[4px_4px_0_#000]">
+              <i class="fas fa-code text-white text-xl"></i>
+            </div>
+            <h2 class="text-3xl font-bold text-gray-800">Example Code</h2>
           </div>
-          <div class="bg-gray-100">
-            <h2 class="text-2xl font-medium text-gray-800 mb-2">CDN:</h2>
-            <script src="https://gist.github.com/nievexvz/7ca765df2a2ea665fca89971c2bc657d.js"></script>
-          </div>
-          <hr class="border-gray-500 mb-3 mt-3" />
-          <div class="bg-gray-100">
-            <h2 class="text-2xl font-medium text-gray-800 mb-2">Shortener:</h2>
-            <script src="https://gist.github.com/nievexvz/e93fbd5200a89b8fcd34f6f17cec0174.js"></script>
+          <div class="space-y-6">
+            <div class="bg-white rounded-xl border-3 border-black shadow-[4px_4px_0_#000] overflow-hidden">
+              <div class="bg-gradient-to-r from-blue-500 to-cyan-500 p-3 border-b-3 border-black">
+                <h3 class="text-xl font-bold text-white flex items-center">
+                  <i class="fas fa-cloud-upload-alt mr-2"></i>CDN Upload
+                </h3>
+              </div>
+              <div class="p-4">
+                <script src="https://gist.github.com/nievexvz/7ca765df2a2ea665fca89971c2bc657d.js"></script>
+              </div>
+            </div>
+            <div class="bg-white rounded-xl border-3 border-black shadow-[4px_4px_0_#000] overflow-hidden">
+              <div class="bg-gradient-to-r from-purple-500 to-pink-500 p-3 border-b-3 border-black">
+                <h3 class="text-xl font-bold text-white flex items-center">
+                  <i class="fas fa-link mr-2"></i>URL Shortener
+                </h3>
+              </div>
+              <div class="p-4">
+                <script src="https://gist.github.com/nievexvz/e93fbd5200a89b8fcd34f6f17cec0174.js"></script>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div class="text-center text-slate-600 mt-12">
-        <p><i class="fas fa-code text-amber-500"></i> Developed by <a class="text-blue-500 font-extrabold" href="https://wa.me/6282250423696">NineTwelve</a> | <a href="https://shinaidocs.pages.dev" class="text-blue-500 font-bold">Docs</a></p>
+      <div class="text-center mt-12 mb-8">
+        <div class="bg-white border-4 border-black rounded-2xl shadow-[8px_8px_0_#000] p-6 inline-block">
+          <p class="text-gray-700 font-bold text-lg">
+          <i class="fas fa-code text-amber-500 mr-2"></i> 
+          Developed by 
+          <a class="text-blue-600 hover:text-blue-700 underline mx-1" href="https://wa.me/6282250423696">NineTwelve</a> 
+          | 
+          <a href="https://dshinai.pages.dev" class="text-purple-600 hover:text-purple-700 underline ml-1">
+            <i class="fas fa-book mr-1"></i>Documentation
+          </a>
+          </p>
+        </div>
       </div>
     </div>
   </body>

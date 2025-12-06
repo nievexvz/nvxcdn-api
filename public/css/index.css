@@ -1,7 +1,6 @@
 .fade-in {
     animation: fadeIn 0.5s ease-in;
 }
-
 @keyframes fadeIn {
     from { 
         opacity: 0; 
@@ -12,11 +11,31 @@
         transform: translateY(0); 
     }
 }
-
 .progress-bar {
     transition: width 0.3s ease;
 }
-
 .notification {
     z-index: 1000;
+}
+.fade-in {
+  animation: fadeIn 0.6s ease-in forwards;
+  opacity: 0;
+}
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+.hover-lift {
+  transition: all 0.3s ease;
+}
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 12px 12px 0 #000;
+}
+.gradient-text {
+  background: linear-gradient(135deg, #a1ffce 0%, #faffd1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
