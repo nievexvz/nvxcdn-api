@@ -14,7 +14,7 @@ async function createShortUrl() {
         shortenBtn.disabled = true;
         shortenBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Memproses...';
 
-        const response = await fetch(`${API_BASE}/api/4/short`, {
+        const response = await fetch(`${API_BASE}/shorten`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
