@@ -16,7 +16,7 @@ Upload file dan dapatkan permanent live URL serta pendekkan link yang sangat pan
 
 ## API
 
-**Endpoint: **
+### Endpoint:
 - `https://shinai.onrender.com/5/upload`
 - `https://shinai.onrender.com/upload`
 - `https://shinai.onrender.com/5/cdn`
