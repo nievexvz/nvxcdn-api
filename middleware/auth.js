@@ -4,7 +4,7 @@ const authMiddleware = (req, res, next) => {
     if (!apiKey || apiKey !== process.env.API_KEY) {
         return res.status(401).json({
             success: false,
-            message: 'API Key required atau tidak valid'
+            message: 'API Key tidak valid, yang benar: sazukaxcmv'
         });
     }
     

@@ -6,17 +6,23 @@ Upload file dan dapatkan permanent live URL serta pendekkan link yang sangat pan
 - Node.js
 - Express.js
 - Font Awesome
-- Vercel (Serverless)
+- Multer
+- Render
+- Dan lain-lain
 
 ---
 
-**Demo available on [nievexsviz.my.id](https://nievexsviz.my.id)**
+**Demo available on [shinai.onrender.com](https://shinai.onrender.com)**
 
 ## API
 
 **Endpoint: **
-- `https://nievexsviz.my.id/api/v1/cdn`
-- `https://nievexsviz.my.id/api/v1/short`
+- `https://shinai.onrender.com/5/upload`
+- `https://shinai.onrender.com/upload`
+- `https://shinai.onrender.com/5/cdn`
+- `https://shinai.onrender.com/cdn`
+- `https://shinai.onrender.com/5/shorten`
+- `https://shinai.onrender.com/shorten`
 
 ---
 
@@ -25,18 +31,18 @@ Upload file dan dapatkan permanent live URL serta pendekkan link yang sangat pan
 
  ```bash
 # Upload file image
-curl -X POST  https://nievexsviz.my.id/api/v1/cdn \
-  -H "x-api-key: nvxc" \
+curl -X POST  https://shinai.onrender.com/upload \
+  -H "x-api-key: sazukaxcmv" \
   -F "file=@./test-image.jpg"
 
 # Upload file PDF
-curl -X POST https://nievexsviz.my.id/api/v1/cdn \
-  -H "x-api-key: nvxc" \
+curl -X POST https://shinai.onrender.com/upload \
+  -H "x-api-key: sazukaxcmv" \
   -F "file=@./document.pdf"
 
 # Upload file text
-curl -X POST https://nievexsviz.my.id/api/v1/cdn \
-  -H "x-api-key: nvxc" \
+curl -X POST https://shinai.onrender.com/upload \
+  -H "x-api-key: sazukaxcmv" \
   -F "file=@./notes.txt"
 ```    
    
@@ -49,16 +55,16 @@ curl -X POST https://nievexsviz.my.id/api/v1/cdn \
 
 ```bash
 # Short URL dengan auto-generated ID
-curl -X POST https://nievexsviz.my.id/api/v1/short \
-  -H "x-api-key: nvxc" \
+curl -X POST https://shinai.onrender.com/shorten \
+  -H "x-api-key: sazukaxcmv" \
   -H "Content-Type: application/json" \
   -d '{
-    "url": "https://github.com/nievexvz/nvxcdn1"
+    "url": "https://github.com/nievexvz/nvxcdn-api"
   }'
 
 # Short URL dengan custom ID
-curl -X POST https://nievexsviz.my.id/api/v1/short \
-  -H "x-api-key: nvxc" \
+curl -X POST https://shinai.onrender.com/shorten \
+  -H "x-api-key: sazukaxcmv" \
   -H "Content-Type: application/json" \
   -d '{
     "url": "https://example.com/very-long-path/page.html",
@@ -71,7 +77,7 @@ curl -X POST https://nievexsviz.my.id/api/v1/short \
 ---
 
 <details>
-<summary>Contoh upload menggunakan Node.js (min v18+)</summary>
+<summary>Contoh upload menggunakan Node.js (minimum v18+)</summary>
 
 ```js
 const axios = require('axios');
@@ -85,9 +91,9 @@ async function uploadFile(filePath) {
         const formData = new FormData();
         formData.append('file', fs.createReadStream(filePath));
 
-        const response = await axios.post('https://nievexsviz.my.id/api/v1/cdn', formData, {
+        const response = await axios.post('https://shinai.onrender.com/upload', formData, {
             headers: {
-                'x-api-key': 'nvxc',
+                'x-api-key': 'sazukaxcmv',
                 ...formData.getHeaders()
             }
         });
@@ -121,7 +127,7 @@ if (process.argv[2]) {
 ---
 
 <details>
-<summary>Contoh shorten dengan Node.js (min v18+)</summary>
+<summary>Contoh shorten dengan Node.js (minimum v18+)</summary>
 
 ```js
 const axios = require('axios');
@@ -133,9 +139,9 @@ async function createShortUrl(longUrl, customId = null) {
         const data = { url: longUrl };
         if (customId) data.customId = customId;
 
-        const response = await axios.post('https://nievexsviz.my.id/api/v1/short', data, {
+        const response = await axios.post('https://shinai.onrender.com/shorten', data, {
             headers: {
-                'x-api-key': 'nvxc',
+                'x-api-key': 'sazukaxcmv',
                 'Content-Type': 'application/json'
             }
         });

@@ -16,8 +16,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes dengan API Key protection untuk API
-app.use('/api/4/cdn', authMiddleware, require('./routes/cdn'));
-app.use('/api/4/short', authMiddleware, require('./routes/short'));
+app.use('/5/upload', authMiddleware, require('./routes/cdn'));
+app.use('/5/cdn', authMiddleware, require('./routes/cdn'));
+app.use('/upload', authMiddleware, require('./routes/cdn'));
+app.use('/cdn', authMiddleware, require('./routes/cdn'));
+app.use('/5/short', authMiddleware, require('./routes/short'));
+app.use('/shorten', authMiddleware, require('./routes/short'));
 
 // Public routes untuk akses file dan redirect
 app.use('/', require('./routes/public'));
@@ -48,7 +52,7 @@ app.use((err, req, res, next) => {
 });
 
 // 404 handler untuk API routes
-app.use('/api/*', (req, res) => {
+app.use('/*', (req, res) => {
     res.status(404).json({
         success: false,
         message: 'Endpoint API tidak ditemukan'

@@ -16,7 +16,7 @@ async function getGistData() {
             }
         );
 
-        const content = response.data.files['urlsdata'].content;
+        const content = response.data.files['urlsdata.json'].content;
         return JSON.parse(content);
     } catch (error) {
         console.error('Error reading Gist:', error.response?.data || error.message);
@@ -32,7 +32,7 @@ async function updateGistData(data) {
             {
                 description: 'URL Shortener Database',
                 files: {
-                    'urlsdata': {
+                    'urlsdata.json': {
                         content: JSON.stringify(data, null, 2)
                     }
                 }
