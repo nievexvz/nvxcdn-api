@@ -5,7 +5,7 @@ const path = require('path');
 const authMiddleware = require('./middleware/auth');
 
 const app = express();
-const PORT = process.env.PORT || 6767;
+const PORT = process.env.PORT || 6167;
 
 // Middleware
 app.use(cors());
@@ -37,7 +37,7 @@ app.get('/health', (req, res) => {
 });
 
 // Root endpoint - serve index.html
-app.get('/', (req, res) => {a
+app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
@@ -52,7 +52,7 @@ app.use((err, req, res, next) => {
 });
 
 // 404 handler untuk API routes
-app.use('/*', (req, res) => {
+app.use('/5/*', (req, res) => {
     res.status(404).json({
         success: false,
         message: 'Endpoint API tidak ditemukan'
